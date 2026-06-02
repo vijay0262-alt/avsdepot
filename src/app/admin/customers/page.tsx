@@ -4,11 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency } from "@/lib/utils";
 
-export const metadata = {
-  title: "Customers - Admin",
-  description: "Manage customer accounts",
-};
-
 export default function CustomersPage() {
   const customers = [
     {

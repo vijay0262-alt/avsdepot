@@ -48,11 +48,6 @@ type Order = {
   notes: string[];
 };
 
-export const metadata = {
-  title: "Order Details - Admin",
-  description: "View and manage order details",
-};
-
 export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   // Mock order data - in production, this would come from an API
   const [order, setOrder] = useState<Order>({

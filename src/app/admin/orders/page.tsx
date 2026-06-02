@@ -5,11 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { formatCurrency } from "@/lib/utils";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Orders - Admin",
-  description: "Manage customer orders",
-};
-
 export default function OrdersPage() {
   const orders = [
     {

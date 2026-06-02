@@ -24,11 +24,6 @@ type Variant = {
   sku: string;
 };
 
-export const metadata = {
-  title: "Edit Product - Admin",
-  description: "Edit an existing product",
-};
-
 export default function EditProductPage({ params }: { params: Promise<{ slug: string }> }) {
   // For now, we'll use the first product as an example since params is async
   const product = getProduct("norton-360-deluxe");

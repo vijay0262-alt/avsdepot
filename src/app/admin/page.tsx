@@ -2,11 +2,6 @@ import { Package, ShoppingCart, Users, DollarSign, TrendingUp, ArrowUpRight, Arr
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-export const metadata = {
-  title: "Admin Dashboard",
-  description: "AVS Depot admin dashboard",
-};
-
 export default function AdminDashboard() {
   const stats = [
     {

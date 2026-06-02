@@ -8,11 +8,6 @@ import { formatCurrency } from "@/lib/utils";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Product Variants - Admin",
-  description: "Manage product variants",
-};
-
 export default function ProductVariantsPage({ params }: { params: Promise<{ slug: string }> }) {
   // This would normally be async, but for now we'll use the first product as an example
   const product = products[0];

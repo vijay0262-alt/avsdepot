@@ -23,11 +23,6 @@ type Variant = {
   sku: string;
 };
 
-export const metadata = {
-  title: "Add Product - Admin",
-  description: "Add a new product to your store",
-};
-
 export default function NewProductPage() {
   const [formData, setFormData] = useState({
     name: "",

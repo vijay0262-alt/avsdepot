@@ -19,11 +19,6 @@ import {
 } from "@/lib/cart-storage";
 import { formatCurrency } from "@/lib/utils";
 
-export const metadata = {
-  title: "Checkout",
-  description: "Complete your purchase at AVS Depot.",
-};
-
 export default function CheckoutPage() {
   const cartSnapshot = useSyncExternalStore(
     subscribeToCartChanges,

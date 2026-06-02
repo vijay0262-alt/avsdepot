@@ -10,11 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export const metadata = {
-  title: "Products - Admin",
-  description: "Manage products in your store",
-};
-
 export default function ProductsPage() {
   const [productList, setProductList] = useState(products);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
