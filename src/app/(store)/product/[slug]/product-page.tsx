@@ -113,7 +113,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
 
       <div className="container mx-auto px-6 py-8">
         {/* Product Gallery and Info */}
-        <div className="grid gap-12 lg:grid-cols-[1fr_400px] lg:gap-16 mb-16">
+        <div className="grid gap-12 lg:grid-cols-[35%_65%] lg:gap-12 mb-16">
           {/* Product Gallery */}
           <div className="space-y-6">
             <div className="relative aspect-[4/3] bg-secondary rounded-2xl overflow-hidden border-2 border-border">
@@ -121,7 +121,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
                 src={images[selectedImage]}
                 alt={product.name}
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
               {product.compareAtPrice && (
@@ -135,7 +135,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`relative aspect-[4/3] w-24 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                  className={`relative aspect-[4/3] w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                     selectedImage === index ? "border-primary shadow-md" : "border-transparent hover:border-border"
                   }`}
                 >
@@ -143,7 +143,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
                     src={image}
                     alt={`${product.name} view ${index + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </button>
               ))}
