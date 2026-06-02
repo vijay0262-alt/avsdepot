@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, Shield, Truck, RotateCcw, HeadphonesIcon, Star, Plus, Minus, ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronLeft, Shield, Truck, RotateCcw, HeadphonesIcon, Star, ChevronDown, ChevronUp } from "lucide-react";
 import type { Product } from "@/types/catalog";
 import { ProductVariantSelector } from "@/components/catalog/product-variant-selector";
 import { ProductCard } from "@/components/catalog/product-card";
@@ -78,7 +78,6 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
 
   const images = [
     product.imageUrl,
-    // Add more image variations in a real implementation
   ];
 
   const requirements = systemRequirements[product.categorySlug as keyof typeof systemRequirements] || systemRequirements.productivity;
