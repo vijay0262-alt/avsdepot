@@ -32,30 +32,69 @@ export const categories: Category[] = [
   {
     slug: "antivirus",
     name: "Antivirus",
-    description: "Security suites, VPN protection and malware defense keys.",
+    description: "Complete security solutions including Norton, McAfee, Kaspersky, Bitdefender, and more.",
     imageUrl:
       "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=900&q=80",
+    subcategories: [
+      { slug: "norton", name: "Norton", description: "Norton 360 and Norton security products" },
+      { slug: "mcafee", name: "McAfee", description: "McAfee Total Protection and security suites" },
+      { slug: "kaspersky", name: "Kaspersky", description: "Kaspersky Total Security and antivirus" },
+      { slug: "bitdefender", name: "Bitdefender", description: "Bitdefender Total Security and protection" },
+      { slug: "trend-micro", name: "Trend Micro", description: "Trend Micro Maximum Security" },
+      { slug: "avg", name: "AVG", description: "AVG Antivirus and security products" },
+      { slug: "avast", name: "Avast", description: "Avast Antivirus and premium security" },
+      { slug: "eset", name: "ESET", description: "ESET NOD32 and Smart Security" },
+      { slug: "webroot", name: "Webroot", description: "Webroot SecureAnywhere antivirus" },
+      { slug: "malwarebytes", name: "Malwarebytes", description: "Malwarebytes premium protection" },
+    ],
   },
   {
     slug: "productivity",
     name: "Productivity",
-    description: "Office apps, PDF tools and business productivity licenses.",
+    description: "PDF tools, virtualization software, and business productivity applications.",
     imageUrl:
       "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+    subcategories: [
+      { slug: "adobe", name: "Adobe", description: "Adobe Acrobat and creative tools" },
+      { slug: "pdf-tools", name: "PDF Tools", description: "Nitro PDF and other PDF solutions" },
+      { slug: "virtualization", name: "Virtualization", description: "VMware and virtual machine software" },
+    ],
   },
   {
-    slug: "windows",
-    name: "Windows",
-    description: "Windows operating system licenses for home and business.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    slug: "office",
-    name: "Office",
-    description: "Microsoft Office and collaboration software license keys.",
+    slug: "microsoft-office",
+    name: "Microsoft Office",
+    description: "Microsoft Office 2021, Office 365, and business productivity suites.",
     imageUrl:
       "https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=900&q=80",
+    subcategories: [
+      { slug: "office-2021", name: "Office 2021", description: "Office 2021 Home & Business, Professional Plus" },
+      { slug: "office-365", name: "Office 365", description: "Microsoft 365 Business and Personal" },
+      { slug: "office-2019", name: "Office 2019", description: "Office 2019 Professional and Home" },
+    ],
+  },
+  {
+    slug: "microsoft-windows",
+    name: "Microsoft Windows",
+    description: "Windows 11, Windows 10, and Windows Server operating system licenses.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+    subcategories: [
+      { slug: "windows-11", name: "Windows 11", description: "Windows 11 Home and Pro licenses" },
+      { slug: "windows-10", name: "Windows 10", description: "Windows 10 Home and Pro licenses" },
+      { slug: "windows-server", name: "Windows Server", description: "Windows Server 2022 and 2019" },
+    ],
+  },
+  {
+    slug: "other",
+    name: "Other",
+    description: "Other software licenses and digital products.",
+    imageUrl:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80",
+    subcategories: [
+      { slug: "vpn", name: "VPN", description: "Virtual Private Network services" },
+      { slug: "backup", name: "Backup", description: "Cloud backup and recovery software" },
+      { slug: "utilities", name: "Utilities", description: "System utilities and optimization tools" },
+    ],
   },
 ];
 
@@ -64,6 +103,7 @@ export const products: Product[] = [
     slug: "norton-360-deluxe",
     name: "Norton 360 Deluxe",
     categorySlug: "antivirus",
+    subcategorySlug: "norton",
     brand: "Norton",
     price: 24.99,
     compareAtPrice: 89.99,
@@ -93,6 +133,7 @@ export const products: Product[] = [
     slug: "mcafee-total-protection",
     name: "McAfee Total Protection",
     categorySlug: "antivirus",
+    subcategorySlug: "mcafee",
     brand: "McAfee",
     price: 19.99,
     compareAtPrice: 79.99,
@@ -118,6 +159,7 @@ export const products: Product[] = [
     slug: "kaspersky-total-security",
     name: "Kaspersky Total Security",
     categorySlug: "antivirus",
+    subcategorySlug: "kaspersky",
     brand: "Kaspersky",
     price: 29.99,
     compareAtPrice: 89.99,
@@ -143,6 +185,7 @@ export const products: Product[] = [
     slug: "bitdefender-total-security",
     name: "Bitdefender Total Security",
     categorySlug: "antivirus",
+    subcategorySlug: "bitdefender",
     brand: "Bitdefender",
     price: 34.99,
     compareAtPrice: 99.99,
@@ -168,6 +211,7 @@ export const products: Product[] = [
     slug: "trend-micro-maximum-security",
     name: "Trend Micro Maximum Security",
     categorySlug: "antivirus",
+    subcategorySlug: "trend-micro",
     brand: "Trend Micro",
     price: 27.99,
     compareAtPrice: 84.99,
@@ -192,7 +236,8 @@ export const products: Product[] = [
   {
     slug: "windows-11-pro",
     name: "Windows 11 Pro License",
-    categorySlug: "windows",
+    categorySlug: "microsoft-windows",
+    subcategorySlug: "windows-11",
     brand: "Microsoft",
     price: 29.99,
     compareAtPrice: 199.99,
@@ -217,7 +262,8 @@ export const products: Product[] = [
   {
     slug: "windows-11-home",
     name: "Windows 11 Home License",
-    categorySlug: "windows",
+    categorySlug: "microsoft-windows",
+    subcategorySlug: "windows-11",
     brand: "Microsoft",
     price: 19.99,
     compareAtPrice: 139.99,
@@ -242,7 +288,8 @@ export const products: Product[] = [
   {
     slug: "windows-10-pro",
     name: "Windows 10 Pro License",
-    categorySlug: "windows",
+    categorySlug: "microsoft-windows",
+    subcategorySlug: "windows-10",
     brand: "Microsoft",
     price: 24.99,
     compareAtPrice: 199.99,
@@ -267,7 +314,8 @@ export const products: Product[] = [
   {
     slug: "windows-server-2022",
     name: "Windows Server 2022",
-    categorySlug: "windows",
+    categorySlug: "microsoft-windows",
+    subcategorySlug: "windows-server",
     brand: "Microsoft",
     price: 149.99,
     compareAtPrice: 1209.99,
@@ -292,7 +340,8 @@ export const products: Product[] = [
   {
     slug: "office-2021-professional-plus",
     name: "Office 2021 Professional Plus",
-    categorySlug: "office",
+    categorySlug: "microsoft-office",
+    subcategorySlug: "office-2021",
     brand: "Microsoft",
     price: 39.99,
     compareAtPrice: 249.99,
@@ -317,7 +366,8 @@ export const products: Product[] = [
   {
     slug: "office-2021-home-business",
     name: "Office 2021 Home & Business",
-    categorySlug: "office",
+    categorySlug: "microsoft-office",
+    subcategorySlug: "office-2021",
     brand: "Microsoft",
     price: 34.99,
     compareAtPrice: 249.99,
@@ -342,7 +392,8 @@ export const products: Product[] = [
   {
     slug: "office-365-business-premium",
     name: "Microsoft 365 Business Premium",
-    categorySlug: "office",
+    categorySlug: "microsoft-office",
+    subcategorySlug: "office-365",
     brand: "Microsoft",
     price: 22.99,
     compareAtPrice: 22.99,
@@ -368,6 +419,7 @@ export const products: Product[] = [
     slug: "adobe-acrobat-pro",
     name: "Adobe Acrobat Pro DC",
     categorySlug: "productivity",
+    subcategorySlug: "adobe",
     brand: "Adobe",
     price: 14.99,
     compareAtPrice: 14.99,
@@ -393,6 +445,7 @@ export const products: Product[] = [
     slug: "nitro-pdf-pro",
     name: "Nitro PDF Pro",
     categorySlug: "productivity",
+    subcategorySlug: "pdf-tools",
     brand: "Nitro",
     price: 49.99,
     compareAtPrice: 159.99,
@@ -418,6 +471,7 @@ export const products: Product[] = [
     slug: "vmware-workstation-pro",
     name: "VMware Workstation Pro",
     categorySlug: "productivity",
+    subcategorySlug: "virtualization",
     brand: "VMware",
     price: 99.99,
     compareAtPrice: 199.99,
@@ -447,8 +501,19 @@ export function getCategory(slug: string) {
   return categories.find((category) => category.slug === slug);
 }
 
+export function getSubcategory(categorySlug: string, subcategorySlug: string) {
+  const category = getCategory(categorySlug);
+  return category?.subcategories?.find((sub) => sub.slug === subcategorySlug);
+}
+
 export function getProductsByCategory(slug: string) {
   return products.filter((product) => product.categorySlug === slug);
+}
+
+export function getProductsBySubcategory(categorySlug: string, subcategorySlug: string) {
+  return products.filter(
+    (product) => product.categorySlug === categorySlug && product.subcategorySlug === subcategorySlug
+  );
 }
 
 export function getProduct(slug: string) {

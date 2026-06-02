@@ -1,8 +1,15 @@
+export type Subcategory = {
+  slug: string;
+  name: string;
+  description: string;
+};
+
 export type Category = {
   slug: string;
   name: string;
   description: string;
   imageUrl: string;
+  subcategories?: Subcategory[];
 };
 
 export type ProductVariant = {
@@ -20,6 +27,7 @@ export type Product = {
   slug: string;
   name: string;
   categorySlug: string;
+  subcategorySlug?: string;
   brand: string;
   price: number;
   compareAtPrice?: number;

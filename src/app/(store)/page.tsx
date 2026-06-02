@@ -3,11 +3,15 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
-  Headphones,
   ShieldCheck,
   Star,
   Truck,
   Wrench,
+  Shield,
+  FileText,
+  Monitor,
+  Grid3x3,
+  Mail,
 } from "lucide-react";
 import { CategoryTile } from "@/components/catalog/category-tile";
 import { ProductCard } from "@/components/catalog/product-card";
@@ -20,141 +24,123 @@ const bestSellers = [...products].reverse();
 
 const benefits = [
   {
-    title: "Curated pro catalog",
-    body: "Commercial-grade AV, security and network supplies organized by job type.",
+    title: "100% Genuine Licenses",
+    body: "Authentic software licenses from authorized distributors with instant digital delivery.",
     icon: BadgeCheck,
   },
   {
-    title: "Installer-ready specs",
-    body: "Product pages are structured for dimensions, compatibility and install notes.",
-    icon: Wrench,
+    title: "Instant Digital Delivery",
+    body: "License keys delivered to your email immediately after purchase.",
+    icon: Truck,
   },
   {
-    title: "Trade workflow ready",
-    body: "Frontend foundation prepared for saved carts, quotes and account pricing.",
+    title: "Secure Payment",
+    body: "Your payment information is protected with enterprise-grade encryption.",
     icon: ShieldCheck,
   },
   {
-    title: "Fulfillment focused",
-    body: "Designed for future shipping rates, stock visibility and order tracking.",
-    icon: Truck,
+    title: "24/7 Support",
+    body: "Expert support available around the clock to help with activation and troubleshooting.",
+    icon: Wrench,
   },
 ];
 
 const reviews = [
   {
-    name: "Maya Chen",
-    role: "AV Project Manager",
+    name: "Sarah Johnson",
+    role: "Small Business Owner",
     quote:
-      "The category flow feels built for real installs. I can find displays, mounts and network gear without jumping through generic retail filters.",
+      "AVS Depot has the best prices on antivirus software. I saved over 70% compared to retail prices and got my license key instantly.",
   },
   {
-    name: "Derrick Lawson",
-    role: "Security Integrator",
+    name: "Mike Thompson",
+    role: "IT Manager",
     quote:
-      "AVS Depot has the right structure for quote building. Product details, account workflows and cart review all feel clean and professional.",
+      "The category structure makes it easy to find exactly what I need. Norton, McAfee, Kaspersky - all in one place with great prices.",
   },
   {
-    name: "Priya Raman",
-    role: "Facilities Buyer",
+    name: "Emily Rodriguez",
+    role: "Freelance Designer",
     quote:
-      "The storefront is simple to scan, especially for repeat purchasing. It feels much closer to a trade portal than a consumer shop.",
+      "I bought Office 2021 and Windows 11 Pro from here. The activation was smooth and the prices are unbeatable.",
   },
 ];
 
 const faqs = [
   {
-    question: "Does AVS Depot support trade accounts?",
+    question: "Are the software licenses genuine?",
     answer:
-      "The frontend includes trade account entry points and account dashboard structure. Pricing rules and approvals will be connected when the backend is added.",
+      "Yes, all our software licenses are 100% genuine and sourced from authorized distributors. We provide authentic activation keys.",
   },
   {
-    question: "Are the products live inventory?",
+    question: "How do I receive my license key?",
     answer:
-      "Not yet. Current products are mock data for frontend development. Inventory and pricing will be powered by PostgreSQL and Supabase later.",
+      "License keys are delivered instantly to your email after successful payment. You'll also find them in your account dashboard.",
   },
   {
-    question: "Can shoppers request project quotes?",
+    question: "Do you offer refunds?",
     answer:
-      "The product and account flows are designed for quote workflows, but quote submission will be implemented with the backend.",
+      "Due to the nature of digital products, we offer refunds only if the license key cannot be activated. Contact support for assistance.",
   },
   {
-    question: "Is checkout production ready?",
+    question: "Can I use the license on multiple devices?",
     answer:
-      "The checkout layout is ready as a frontend foundation. Payments, taxes, shipping and order creation are intentionally deferred.",
+      "Each license has specific device limits based on the variant you purchase (1, 3, or 5 devices). Check the product details for more information.",
   },
 ];
+
+const categoryIcons = {
+  antivirus: Shield,
+  "microsoft-office": FileText,
+  "microsoft-windows": Monitor,
+  productivity: Grid3x3,
+  other: Wrench,
+};
 
 export default function HomePage() {
   return (
     <>
-      <section className="border-b bg-secondary/40">
-        <Container className="grid gap-10 py-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:py-16">
+      <section className="border-b bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <Container className="grid gap-10 py-16 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
           <div className="max-w-2xl">
-            <Badge variant="secondary">Professional AV ecommerce</Badge>
-            <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Build AV, security and network projects from one premium depot.
+            <Badge variant="secondary" className="mb-4">Premium Software Licenses</Badge>
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Genuine Software at Unbeatable Prices
             </h1>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              Shop curated commercial displays, cameras, PoE networking,
-              mounts and install essentials with a storefront designed for
-              integrators and business buyers.
+              Shop antivirus, Microsoft Office, Windows, and productivity software with instant digital delivery. Save up to 80% on authentic licenses.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-wrap gap-4">
               <Button asChild size="lg">
                 <Link href="/category/antivirus">
-                  Shop products <ArrowRight className="size-4" />
+                  Shop Antivirus <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/register">Create trade account</Link>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/category/microsoft-office">
+                  Shop Office <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
-            <div className="mt-8 grid gap-4 text-sm text-muted-foreground sm:grid-cols-3">
-              <p>
-                <span className="block text-2xl font-bold text-foreground">
-                  500+
-                </span>
-                SKUs planned
-              </p>
-              <p>
-                <span className="block text-2xl font-bold text-foreground">
-                  24/7
-                </span>
-                Online ordering
-              </p>
-              <p>
-                <span className="block text-2xl font-bold text-foreground">
-                  Pro
-                </span>
-                Buyer workflows
-              </p>
-            </div>
           </div>
-
-          <div className="relative overflow-hidden rounded-lg border bg-background shadow-sm">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
-                alt="Professional team reviewing AV project equipment"
-                fill
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
-            </div>
-            <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-6">
-              <p className="text-sm font-semibold uppercase tracking-wide text-white/75">
-                Featured project kit
-              </p>
-              <h2 className="mt-2 text-2xl font-bold">
-                Conference room AV starter bundle
-              </h2>
-              <p className="mt-2 max-w-md text-sm text-white/80">
-                Displays, switching, mounts and networking components grouped
-                for faster project planning.
-              </p>
+          <div className="relative hidden lg:block">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl transform rotate-3"></div>
+            <div className="relative bg-card rounded-3xl p-8 shadow-2xl border">
+              <div className="grid grid-cols-2 gap-4">
+                {categories.slice(0, 4).map((category) => {
+                  const Icon = categoryIcons[category.slug as keyof typeof categoryIcons] || Shield;
+                  return (
+                    <Link
+                      key={category.slug}
+                      href={`/category/${category.slug}`}
+                      className="group flex flex-col items-center p-6 rounded-xl bg-secondary/50 hover:bg-secondary transition"
+                    >
+                      <Icon className="h-8 w-8 text-primary mb-3" />
+                      <span className="font-semibold text-sm text-center">{category.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </Container>
@@ -162,7 +148,7 @@ export default function HomePage() {
 
       <ProductSection
         title="Featured Products"
-        description="High-priority products for storefront merchandising and launch testing."
+        description="Top-selling antivirus and security software with instant digital delivery."
         href="/category/antivirus"
         products={featuredProducts}
       />
@@ -170,23 +156,43 @@ export default function HomePage() {
       <section className="border-y bg-secondary/30">
         <Container className="py-12">
           <SectionHeading
-            title="Top Categories"
-            description="Start with the project area, then drill into curated product sets."
+            title="Shop by Category"
+            description="Browse our complete catalog of software licenses organized by category."
           />
-          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => (
-              <div key={category.slug} className="overflow-hidden rounded-lg border shadow-sm">
-                <CategoryTile category={category} />
-              </div>
-            ))}
+          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {categories.map((category) => {
+              const Icon = categoryIcons[category.slug as keyof typeof categoryIcons] || Shield;
+              return (
+                <Link
+                  key={category.slug}
+                  href={`/category/${category.slug}`}
+                  className="group overflow-hidden rounded-lg border bg-card shadow-sm hover:shadow-md transition"
+                >
+                  <div className="relative aspect-video">
+                    <Image
+                      src={category.imageUrl}
+                      alt={category.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <Icon className="h-6 w-6 text-white mb-2" />
+                      <h3 className="text-lg font-bold text-white">{category.name}</h3>
+                      <p className="text-sm text-white/80 line-clamp-2">{category.description}</p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </section>
 
       <ProductSection
         title="Best Sellers"
-        description="Mock bestseller data for validating product grids, cards and buying flows."
-        href="/category/productivity"
+        description="Most popular software licenses chosen by our customers."
+        href="/category/antivirus"
         products={bestSellers}
       />
 
@@ -195,14 +201,13 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-primary-foreground/70">
-                Why choose AVS Depot
+                Why Choose AVS Depot
               </p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight">
-                Built like a professional purchasing tool, not a generic catalog.
+                Premium Software Licenses at Unbeatable Prices
               </h2>
               <p className="mt-4 text-primary-foreground/75">
-                The frontend is ready for complex ecommerce behavior without
-                making the shopping experience feel heavy.
+                Save up to 80% on genuine software licenses with instant digital delivery and 24/7 support.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -227,7 +232,7 @@ export default function HomePage() {
         <Container className="py-12">
           <SectionHeading
             title="Customer Reviews"
-            description="Representative buyer feedback for the storefront experience."
+            description="See what our customers say about their experience with AVS Depot."
           />
           <div className="mt-7 grid gap-5 lg:grid-cols-3">
             {reviews.map((review) => (
@@ -257,10 +262,10 @@ export default function HomePage() {
               FAQ
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight">
-              Common ecommerce questions
+              Frequently Asked Questions
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Clear expectations while AVS Depot is still frontend-only.
+              Everything you need to know about buying software licenses from AVS Depot.
             </p>
           </div>
           <div className="grid gap-3">
@@ -286,20 +291,19 @@ export default function HomePage() {
           <div className="grid gap-8 rounded-lg border bg-foreground p-6 text-background shadow-sm md:grid-cols-[1fr_0.9fr] md:items-center md:p-8">
             <div>
               <div className="flex size-11 items-center justify-center rounded-md bg-background/10">
-                <Headphones className="size-5" />
+                <Mail className="size-5" />
               </div>
               <h2 className="mt-5 text-3xl font-bold tracking-tight">
-                Get launch updates and pro buying tips.
+                Get exclusive deals and updates.
               </h2>
               <p className="mt-3 text-background/70">
-                Join the AVS Depot newsletter for product drops, trade account
-                updates and project-ready buying guides.
+                Join the AVS Depot newsletter for exclusive discounts, new product launches, and software buying tips.
               </p>
             </div>
             <form className="grid gap-3 sm:grid-cols-[1fr_auto]">
               <input
                 type="email"
-                placeholder="work@email.com"
+                placeholder="your@email.com"
                 className="h-11 rounded-md border border-white/15 bg-white px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:ring-2 focus:ring-accent"
               />
               <Button type="button" variant="secondary" size="lg">
