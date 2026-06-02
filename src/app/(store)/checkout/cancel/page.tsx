@@ -5,6 +5,8 @@ import { XCircle, ArrowLeft, ShoppingCart, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 
+export const dynamic = 'force-dynamic';
+
 export default function CheckoutCancelPage() {
   return (
     <Container className="flex min-h-[calc(100vh-8rem)] items-center justify-center py-10">

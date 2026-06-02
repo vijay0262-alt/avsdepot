@@ -19,6 +19,8 @@ import {
 } from "@/lib/cart-storage";
 import { formatCurrency } from "@/lib/utils";
 
+export const dynamic = 'force-dynamic';
+
 export default function CheckoutPage() {
   const cartSnapshot = useSyncExternalStore(
     subscribeToCartChanges,
