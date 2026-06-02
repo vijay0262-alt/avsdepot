@@ -111,12 +111,12 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
         </nav>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-6 py-8">
         {/* Product Gallery and Info */}
         <div className="grid gap-12 lg:grid-cols-[1fr_400px] lg:gap-16 mb-16">
           {/* Product Gallery */}
           <div className="space-y-6">
-            <div className="relative aspect-square bg-secondary rounded-2xl overflow-hidden border-2 border-border">
+            <div className="relative aspect-[4/3] bg-secondary rounded-2xl overflow-hidden border-2 border-border">
               <Image
                 src={images[selectedImage]}
                 alt={product.name}
@@ -135,7 +135,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`relative aspect-square w-24 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                  className={`relative aspect-[4/3] w-24 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
                     selectedImage === index ? "border-primary shadow-md" : "border-transparent hover:border-border"
                   }`}
                 >
@@ -279,11 +279,11 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
         {/* Product Details Tabs */}
         <div className="mb-20">
           <div className="border-b-2 border-border mb-8">
-            <div className="flex gap-8">
-              <button className="pb-4 border-b-2 border-primary font-bold text-base">Description</button>
-              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base">Features</button>
-              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base">System Requirements</button>
-              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base">FAQ</button>
+            <div className="flex gap-8 overflow-x-auto">
+              <button className="pb-4 border-b-2 border-primary font-bold text-base whitespace-nowrap">Description</button>
+              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base whitespace-nowrap">Features</button>
+              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base whitespace-nowrap">System Requirements</button>
+              <button className="pb-4 border-b-2 border-transparent text-muted-foreground hover:text-foreground font-medium text-base whitespace-nowrap">FAQ</button>
             </div>
           </div>
 
@@ -303,30 +303,30 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
             <h2 className="text-3xl font-bold mb-6">Key Features</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {product.specs.map((spec, index) => (
-                <div key={index} className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border border-border">
+                <div key={index} className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                   <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                     <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
                   </div>
-                  <span className="text-base font-medium">{spec}</span>
+                  <span className="text-base font-medium leading-relaxed">{spec}</span>
                 </div>
               ))}
-              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border border-border">
+              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
                 </div>
-                <span className="text-base font-medium">Instant digital delivery via email</span>
+                <span className="text-base font-medium leading-relaxed">Instant digital delivery via email</span>
               </div>
-              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border border-border">
+              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
                 </div>
-                <span className="text-base font-medium">Secure payment processing</span>
+                <span className="text-base font-medium leading-relaxed">Secure payment processing</span>
               </div>
-              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border border-border">
+              <div className="flex items-start gap-4 p-5 bg-secondary/50 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 className="h-4 w-4 text-primary-foreground" />
                 </div>
-                <span className="text-base font-medium">30-day money-back guarantee</span>
+                <span className="text-base font-medium leading-relaxed">30-day money-back guarantee</span>
               </div>
             </div>
           </div>
@@ -338,23 +338,23 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
               <dl className="space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                   <dt className="font-bold text-base min-w-[180px]">Operating System:</dt>
-                  <dd className="text-muted-foreground text-base">{requirements.operatingSystem}</dd>
+                  <dd className="text-muted-foreground text-base leading-relaxed">{requirements.operatingSystem}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                   <dt className="font-bold text-base min-w-[180px]">Processor:</dt>
-                  <dd className="text-muted-foreground text-base">{requirements.processor}</dd>
+                  <dd className="text-muted-foreground text-base leading-relaxed">{requirements.processor}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                   <dt className="font-bold text-base min-w-[180px]">Memory:</dt>
-                  <dd className="text-muted-foreground text-base">{requirements.memory}</dd>
+                  <dd className="text-muted-foreground text-base leading-relaxed">{requirements.memory}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                   <dt className="font-bold text-base min-w-[180px]">Disk Space:</dt>
-                  <dd className="text-muted-foreground text-base">{requirements.diskSpace}</dd>
+                  <dd className="text-muted-foreground text-base leading-relaxed">{requirements.diskSpace}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6">
                   <dt className="font-bold text-base min-w-[180px]">Internet:</dt>
-                  <dd className="text-muted-foreground text-base">{requirements.internet}</dd>
+                  <dd className="text-muted-foreground text-base leading-relaxed">{requirements.internet}</dd>
                 </div>
               </dl>
             </div>
@@ -370,11 +370,11 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
                     onClick={() => toggleFaq(index)}
                     className="w-full flex items-center justify-between p-6 text-left hover:bg-secondary/50 transition-colors"
                   >
-                    <span className="font-bold text-base">{faq.question}</span>
+                    <span className="font-bold text-base leading-relaxed">{faq.question}</span>
                     {expandedFaq === index ? (
-                      <ChevronUp className="h-5 w-5" />
+                      <ChevronUp className="h-5 w-5 flex-shrink-0" />
                     ) : (
-                      <ChevronDown className="h-5 w-5" />
+                      <ChevronDown className="h-5 w-5 flex-shrink-0" />
                     )}
                   </button>
                   {expandedFaq === index && (
