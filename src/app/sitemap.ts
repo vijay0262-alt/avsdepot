@@ -11,6 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/login",
     "/register",
     "/account",
+    "/legal/privacy",
+    "/legal/terms",
+    "/legal/returns",
+    "/legal/warranty",
     ...categories.map((category) => `/category/${category.slug}`),
     ...products.map((product) => `/product/${product.slug}`),
   ].map((path) => ({
