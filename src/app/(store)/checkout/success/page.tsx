@@ -6,7 +6,6 @@ import Link from "next/link";
 import { CheckCircle2, Package, Home, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
-import { stripe } from "@/lib/stripe/client";
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
