@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
-import { CreditCard, Lock, Truck, Shield, CheckCircle2, ChevronRight } from "lucide-react";
+import { Lock, Truck, Shield, CheckCircle2, ChevronRight, Loader2 } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,31 +28,60 @@ export default function CheckoutPage() {
   const cartItems = parseCartSnapshot(cartSnapshot);
   const subtotal = getCartSubtotal(cartItems);
 
-  const [selectedPayment, setSelectedPayment] = useState<"stripe" | "paypal" | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     phone: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
-    cardNumber: "",
-    cardExpiry: "",
-    cardCvc: "",
-    cardName: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Checkout submitted:", formData, selectedPayment);
-    alert("Checkout functionality coming soon!");
+    setError(null);
+    setLoading(true);
+
+    try {
+      // Validate form
+      if (!formData.email || !formData.firstName || !formData.lastName) {
+        throw new Error("Please fill in all required fields");
+      }
+
+      // Create Stripe checkout session
+      const response = await fetch('/api/checkout/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cartItems,
+          customerEmail: formData.email,
+          customerName: `${formData.firstName} ${formData.lastName}`,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Redirect to Stripe Checkout
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error("Failed to create checkout session");
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred during checkout");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (cartItems.length === 0) {
@@ -147,199 +176,24 @@ export default function CheckoutPage() {
             </div>
           </section>
 
-          {/* Billing Information */}
-          <section className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">
-                2
-              </div>
-              <h2 className="text-xl font-semibold">Billing Information</h2>
+          {error && (
+            <div className="rounded-lg border border-destructive bg-destructive/10 p-4">
+              <p className="text-sm text-destructive">{error}</p>
             </div>
-            
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="address">Street address *</Label>
-                <Input
-                  id="address"
-                  placeholder="123 Main Street"
-                  autoComplete="street-address"
-                  required
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
-              </div>
+          )}
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="grid gap-2">
-                  <Label htmlFor="city">City *</Label>
-                  <Input
-                    id="city"
-                    placeholder="New York"
-                    autoComplete="address-level2"
-                    required
-                    value={formData.city}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="state">State/Province *</Label>
-                  <Input
-                    id="state"
-                    placeholder="NY"
-                    autoComplete="address-level1"
-                    required
-                    value={formData.state}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="grid gap-2">
-                  <Label htmlFor="zipCode">ZIP/Postal code *</Label>
-                  <Input
-                    id="zipCode"
-                    placeholder="10001"
-                    autoComplete="postal-code"
-                    required
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="country">Country *</Label>
-                  <Input
-                    id="country"
-                    placeholder="United States"
-                    autoComplete="country-name"
-                    required
-                    value={formData.country}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Payment Method */}
-          <section className="rounded-lg border bg-card p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold">
-                3
-              </div>
-              <h2 className="text-xl font-semibold">Payment Method</h2>
-            </div>
-
-            <div className="grid gap-4">
-              {/* Stripe Placeholder */}
-              <button
-                type="button"
-                onClick={() => setSelectedPayment("stripe")}
-                className={`relative rounded-lg border-2 p-4 text-left transition ${
-                  selectedPayment === "stripe"
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <CreditCard className="h-5 w-5" />
-                    <div>
-                      <p className="font-semibold">Credit Card</p>
-                      <p className="text-sm text-muted-foreground">Visa, Mastercard, American Express</p>
-                    </div>
-                  </div>
-                  {selectedPayment === "stripe" && (
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                  )}
-                </div>
-                {selectedPayment === "stripe" && (
-                  <div className="mt-4 grid gap-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="cardNumber">Card number</Label>
-                      <Input
-                        id="cardNumber"
-                        placeholder="4242 4242 4242 4242"
-                        autoComplete="cc-number"
-                        value={formData.cardNumber}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="grid gap-2">
-                        <Label htmlFor="cardExpiry">Expiry date</Label>
-                        <Input
-                          id="cardExpiry"
-                          placeholder="MM/YY"
-                          autoComplete="cc-exp"
-                          value={formData.cardExpiry}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                      <div className="grid gap-2">
-                        <Label htmlFor="cardCvc">CVC</Label>
-                        <Input
-                          id="cardCvc"
-                          placeholder="123"
-                          autoComplete="cc-csc"
-                          value={formData.cardCvc}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="cardName">Name on card</Label>
-                      <Input
-                        id="cardName"
-                        placeholder="John Doe"
-                        autoComplete="cc-name"
-                        value={formData.cardName}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                  </div>
-                )}
-              </button>
-
-              {/* PayPal Placeholder */}
-              <button
-                type="button"
-                onClick={() => setSelectedPayment("paypal")}
-                className={`relative rounded-lg border-2 p-4 text-left transition ${
-                  selectedPayment === "paypal"
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-5 w-5 rounded bg-blue-600 flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">P</span>
-                    </div>
-                    <div>
-                      <p className="font-semibold">PayPal</p>
-                      <p className="text-sm text-muted-foreground">Pay with your PayPal account</p>
-                    </div>
-                  </div>
-                  {selectedPayment === "paypal" && (
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
-                  )}
-                </div>
-                {selectedPayment === "paypal" && (
-                  <div className="mt-4 p-4 bg-secondary/50 rounded-lg text-center">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      You will be redirected to PayPal to complete your purchase securely.
-                    </p>
-                    <Badge variant="outline">PayPal Integration Coming Soon</Badge>
-                  </div>
-                )}
-              </button>
-            </div>
-          </section>
-
-          <Button type="submit" size="lg" className="w-full" disabled={!selectedPayment}>
-            Complete Purchase
-            <ChevronRight className="ml-2 h-4 w-4" />
+          <Button type="submit" size="lg" className="w-full" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              <>
+                Continue to Payment
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </>
+            )}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
