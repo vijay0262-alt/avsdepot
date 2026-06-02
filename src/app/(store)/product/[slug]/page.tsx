@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
+import { ProductVariantSelector } from "@/components/catalog/product-variant-selector";
 import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -80,15 +81,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <p className="mt-4 text-lg text-muted-foreground">
             {product.shortDescription}
           </p>
-          <p className="mt-6 text-3xl font-bold">
-            {formatCurrency(product.price)}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button size="lg">Add to cart</Button>
-            <Button size="lg" variant="outline">
-              Request quote
-            </Button>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <p className="text-sm text-muted-foreground">Starting at</p>
+            <p className="text-3xl font-bold">{formatCurrency(product.price)}</p>
+            {product.compareAtPrice && (
+              <p className="text-sm text-muted-foreground line-through">
+                {formatCurrency(product.compareAtPrice)}
+              </p>
+            )}
           </div>
+          <ProductVariantSelector product={product} />
           <div className="mt-10 border-t pt-8">
             <h2 className="font-semibold">Key specifications</h2>
             <ul className="mt-4 grid gap-3 text-sm text-muted-foreground">

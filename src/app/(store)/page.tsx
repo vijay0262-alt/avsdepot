@@ -102,7 +102,7 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
-                <Link href="/category/displays">
+                <Link href="/category/antivirus">
                   Shop products <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -163,7 +163,7 @@ export default function HomePage() {
       <ProductSection
         title="Featured Products"
         description="High-priority products for storefront merchandising and launch testing."
-        href="/category/displays"
+        href="/category/antivirus"
         products={featuredProducts}
       />
 
@@ -186,7 +186,7 @@ export default function HomePage() {
       <ProductSection
         title="Best Sellers"
         description="Mock bestseller data for validating product grids, cards and buying flows."
-        href="/category/networking"
+        href="/category/productivity"
         products={bestSellers}
       />
 

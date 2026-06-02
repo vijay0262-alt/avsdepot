@@ -42,9 +42,16 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.shortDescription}
         </p>
         <div className="mt-4 flex items-center justify-between gap-3">
-          <p className="font-bold">{formatCurrency(product.price)}</p>
+          <div>
+            <p className="font-bold">{formatCurrency(product.price)}</p>
+            {product.compareAtPrice && (
+              <p className="text-xs text-muted-foreground line-through">
+                {formatCurrency(product.compareAtPrice)}
+              </p>
+            )}
+          </div>
           <Button size="sm" variant="outline">
-            Add
+            View
           </Button>
         </div>
       </div>
