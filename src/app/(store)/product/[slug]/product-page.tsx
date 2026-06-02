@@ -113,42 +113,43 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
 
       <div className="container mx-auto px-6 py-8">
         {/* Product Gallery and Info */}
-        <div className="grid gap-12 lg:grid-cols-[35%_65%] lg:gap-12 mb-16">
-          {/* Product Gallery */}
-          <div className="space-y-6">
-            <div className="relative aspect-[4/3] bg-secondary rounded-2xl overflow-hidden border-2 border-border">
-              <Image
-                src={images[selectedImage]}
-                alt={product.name}
-                fill
-                className="object-contain"
-                priority
-              />
-              {product.compareAtPrice && (
-                <Badge className="absolute top-6 left-6 bg-red-500 hover:bg-red-600 text-white font-bold text-base px-4 py-2 rounded-full shadow-lg">
-                  Save {savingsPercentage}%
-                </Badge>
-              )}
+        <div className="rounded-2xl border-2 border-border bg-card p-8 shadow-lg">
+          <div className="grid gap-12 lg:grid-cols-[55%_45%] lg:gap-12 mb-16">
+            {/* Product Gallery */}
+            <div className="space-y-6">
+              <div className="relative aspect-[4/3] bg-secondary rounded-2xl overflow-hidden border-2 border-border">
+                <Image
+                  src={images[selectedImage]}
+                  alt={product.name}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+                {product.compareAtPrice && (
+                  <Badge className="absolute top-6 left-6 bg-red-500 hover:bg-red-600 text-white font-bold text-base px-4 py-2 rounded-full shadow-lg">
+                    Save {savingsPercentage}%
+                  </Badge>
+                )}
+              </div>
+              <div className="flex gap-3">
+                {images.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`relative aspect-[4/3] w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                      selectedImage === index ? "border-primary shadow-md" : "border-transparent hover:border-border"
+                    }`}
+                  >
+                    <Image
+                      src={image}
+                      alt={`${product.name} view ${index + 1}`}
+                      fill
+                      className="object-contain"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-3">
-              {images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`relative aspect-[4/3] w-20 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                    selectedImage === index ? "border-primary shadow-md" : "border-transparent hover:border-border"
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`${product.name} view ${index + 1}`}
-                    fill
-                    className="object-contain"
-                  />
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Sticky Purchase Box */}
           <div className="lg:sticky lg:top-24 lg:self-start">
@@ -232,6 +233,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         {/* Customer Benefits Section */}
