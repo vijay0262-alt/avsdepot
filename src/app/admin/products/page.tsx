@@ -6,6 +6,7 @@ import { products, categories } from "@/lib/catalog-data";
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export const metadata = {
   title: "Products - Admin",
@@ -13,6 +14,15 @@ export const metadata = {
 };
 
 export default function ProductsPage() {
+  const [productList, setProductList] = useState(products);
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+
+  const handleDelete = (slug: string) => {
+    setProductList(productList.filter((p) => p.slug !== slug));
+    setDeleteConfirm(null);
+    alert("Product deleted! (Backend integration required)");
+  };
+
   return (
     <div className="p-8">
       <div className="flex items-center justify-between mb-8">
@@ -20,9 +30,11 @@ export default function ProductsPage() {
           <h1 className="text-3xl font-bold tracking-tight">Products</h1>
           <p className="text-muted-foreground mt-2">Manage your product inventory</p>
         </div>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Product
+        <Button asChild>
+          <Link href="/admin/products/new">
+            <Plus className="h-4 w-4 mr-2" />
+            Add Product
+          </Link>
         </Button>
       </div>
 
@@ -71,7 +83,7 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+              {productList.map((product) => (
                 <tr key={product.slug} className="border-t hover:bg-secondary/50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
@@ -124,14 +136,42 @@ export default function ProductsPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="ghost" size="sm">
-                        <Edit className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/admin/products/${product.slug}/edit`}>
+                          <Edit className="h-4 w-4" />
+                        </Link>
                       </Button>
-                      <Button variant="ghost" size="sm">
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <MoreVertical className="h-4 w-4" />
+                      {deleteConfirm === product.slug ? (
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDelete(product.slug)}
+                            className="text-destructive"
+                          >
+                            Confirm
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setDeleteConfirm(null)}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setDeleteConfirm(product.slug)}
+                        >
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      )}
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/admin/products/${product.slug}`}>
+                          <MoreVertical className="h-4 w-4" />
+                        </Link>
                       </Button>
                     </div>
                   </td>
@@ -145,7 +185,7 @@ export default function ProductsPage() {
       {/* Pagination */}
       <div className="flex items-center justify-between mt-6">
         <p className="text-sm text-muted-foreground">
-          Showing 1-{products.length} of {products.length} products
+          Showing 1-{productList.length} of {productList.length} products
         </p>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" disabled>
