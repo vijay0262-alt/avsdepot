@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { formatCurrency } from "@/lib/utils";
+import Link from "next/link";
 
 export const metadata = {
   title: "Orders - Admin",
@@ -182,11 +183,15 @@ export default function OrdersPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/admin/orders/${order.id}`}>
+                          <Eye className="h-4 w-4" />
+                        </Link>
                       </Button>
-                      <Button variant="ghost" size="sm">
-                        <MoreVertical className="h-4 w-4" />
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link href={`/admin/orders/${order.id}`}>
+                          <MoreVertical className="h-4 w-4" />
+                        </Link>
                       </Button>
                     </div>
                   </td>
