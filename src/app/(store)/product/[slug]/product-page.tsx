@@ -111,7 +111,7 @@ export function ProductPage({ product, relatedProducts }: ProductPageProps) {
         </nav>
       </div>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto py-8">
         {/* Product Gallery and Info */}
         <div className="rounded-2xl border-2 border-border bg-card p-8 shadow-lg">
           <div className="grid gap-12 lg:grid-cols-[55%_45%] lg:gap-12 mb-16">

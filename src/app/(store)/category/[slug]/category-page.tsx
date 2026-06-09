@@ -145,7 +145,7 @@ export function CategoryPage({ category, searchParams }: CategoryPageProps) {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto py-8">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm text-muted-foreground">
           <Link href="/" className="hover:text-foreground">
